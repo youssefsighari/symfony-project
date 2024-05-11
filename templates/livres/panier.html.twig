@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+{% block body %}
+
+<table class="table">
+<thead>
+	<tr>
+		<th>Titre</th>
+		<th>prix</th>
+		<th>quantite</th>
+		<th>total</th>
+		<th colspan="4">Action</th>
+	</tr>
+</thead>
+<tbody>
+	{% for element in data %}
+		<tr>
+			<td>{{element.livre.titre}}</td>
+			<td>{{element.livre.prix}}</td>
+			<td>{{element.quantite}}</td>
+			<td>{{element.quantite * element.livre.prix}}</td>
+			<td>
+			<a href="{{url('ajouter_livres',{'id':element.livre.id})}}" class="btn btn-success">+</a>
+			<a href="{{url('remove_livres',{'id':element.livre.id})}}" class="btn btn-warning">-</a>
+			<a href="{{url('supp_livres',{'id':element.livre.id})}}" class="btn btn-danger">Supprimer</a>
+			</td>
+		</tr>
+
+
+		{% else %}
+
+		<tr>
+		<td colspan="5">Votre panier est vide</td>
+		</tr>
+{% endfor %}
+</tbody>
+
+<tfoot>
+<tr>
+<td colspan="3">Total</td>
+<td>{{ total }}</td>
+<td>
+<a href="{{url('vider_livres')}}" class="btn btn-danger">Vider</a>
+</td>
+
+</tr>
+
+</tfoot>
+
+
+
+
+
+</table>{% endblock %}
